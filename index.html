@@ -3,18 +3,153 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
+    <title>Special Login Page</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Body Styling */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to bottom right, #ff7eb3, #ff758c);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+            color: white;
+        }
+
+        /* Typewriter Effect Styling */
+        .typewriter {
+            font-size: 2rem;
+            font-weight: bold;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 2px solid white;
+            animation: typing 4s steps(30, end), blink .5s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink {
+            from, to { border-color: transparent; }
+            50% { border-color: white; }
+        }
+
+        /* Container for Login */
+        .login-container {
+            text-align: center;
+        }
+
+        .login-box {
+            margin-top: 50px;
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .login-box input {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .login-box button {
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            background-color: #ff5e78;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .login-box button:hover {
+            background-color: #ff2e4c;
+        }
+
+        /* Party Poppers */
+        .poppers {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .poppers div {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: white;
+            opacity: 0.7;
+            border-radius: 50%;
+            animation: fall 3s linear infinite;
+        }
+
+        @keyframes fall {
+            from {
+                transform: translateY(-100vh);
+            }
+            to {
+                transform: translateY(100vh);
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
+    <div class="login-container">
+        <div class="typewriter">Hello 😃 Preeti, How are you Today?</div>
+
         <div class="login-box">
-            <h2>Welcome</h2>
             <input type="text" id="username" placeholder="Username">
             <input type="password" id="password" placeholder="Password">
-            <button onclick="validate()">Login</button>
+            <button onclick="validateLogin()">Login</button>
         </div>
     </div>
-    <script src="script.js"></script>
+
+    <div class="poppers" id="poppers"></div>
+
+    <script>
+        // Create Party Poppers Effect
+        function createPoppers() {
+            const poppersContainer = document.getElementById('poppers');
+            for (let i = 0; i < 100; i++) {
+                const popper = document.createElement('div');
+                popper.style.left = Math.random() * 100 + '%';
+                popper.style.animationDuration = 1 + Math.random() * 2 + 's';
+                popper.style.background = `hsl(${Math.random() * 360}, 100%, 70%)`;
+                poppersContainer.appendChild(popper);
+            }
+
+            setTimeout(() => {
+                poppersContainer.innerHTML = '';
+            }, 3000); // Clear poppers after 3 seconds
+        }
+
+        // Validate Login
+        function validateLogin() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if (username === "preetiisspecial" && password === "14122003") {
+                alert("Login successful! 🎉 Redirecting to the website...");
+                createPoppers();
+                setTimeout(() => {
+                    window.location.href = "./website-content/index.html";
+                }, 3000); // Wait 3 seconds for popper effect
+            } else {
+                alert("Incorrect username or password. Please try again.");
+            }
+        }
+    </script>
 </body>
 </html>
