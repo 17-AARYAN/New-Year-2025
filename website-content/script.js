@@ -18,8 +18,13 @@ captureBtn.addEventListener('click', () => {
 
 // Start the camera
 async function startCamera() {
-    const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-    camera.srcObject = stream;
+    try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        camera.srcObject = stream;
+    } catch (err) {
+        console.error("Camera access denied:", err);
+        alert("Please allow camera access.");
+    }
 }
 
 // Capture photo and compare
@@ -40,20 +45,7 @@ snapBtn.addEventListener('click', async () => {
     cameraInterface.classList.add('hidden');
 });
 
-// Dummy comparison function (replace with a better algorithm for production)
+// Dummy comparison function
 async function compareImages(refImg, capImg) {
-    return new Promise((resolve) => {
-        const refCanvas = document.createElement('canvas');
-        const refCtx = refCanvas.getContext('2d');
-        refCanvas.width = refImg.width;
-        refCanvas.height = refImg.height;
-        refCtx.drawImage(refImg, 0, 0);
-
-        const refData = refCtx.getImageData(0, 0, refCanvas.width, refCanvas.height);
-        const capCtx = snapshot.getContext('2d');
-        const capData = capCtx.getImageData(0, 0, snapshot.width, snapshot.height);
-
-        // Compare pixel-by-pixel (basic comparison for simplicity)
-        resolve(refData.data.toString() === capData.data.toString());
-    });
+    return refImg.src === capImg; // Simplified for now, replace with better matching logic.
 }
