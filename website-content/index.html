@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cartoon Background with Photo Match</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="video-container">
+        <video autoplay loop muted id="background-video">
+            <source src="cartoons.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    <div class="content">
+        <button id="capture-btn">Click Photo</button>
+    </div>
+    <div id="camera-interface" class="hidden">
+        <video id="camera" autoplay></video>
+        <canvas id="snapshot" class="hidden"></canvas>
+        <button id="snap-btn">Capture</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
